@@ -379,7 +379,7 @@ namespace TimeSolution
                             {
                                 apiFlag = "";
                             }
-                            else if (MessagesController.cacheList.luisId.Equals("cjchat_luis_01") && MessagesController.cacheList.luisIntent.Contains("quot"))
+                            else if (MessagesController.cacheList.luisId.Equals("timesolution_luis_01") && MessagesController.cacheList.luisIntent.Contains("quot"))
                             {
                                 apiFlag = "QUOT";
                             }
