@@ -396,12 +396,14 @@ namespace TimeSolution
                                 DialogList dlg = db.SelectDialog(MessagesController.relationList[m].dlgId);
                                 Activity commonReply = activity.CreateReply();
                                 Attachment tempAttachment = new Attachment();
-                                DButil.HistoryLog("dlg.dlgType : " + dlg.dlgType);
+                                DButil.HistoryLog("dlg.dlgType : " + dlg.dlgType); 
                                 if (dlg.dlgType.Equals(CARDDLG))
                                 {
                                     foreach (CardList tempcard in dlg.dialogCard)
                                     {
                                         DButil.HistoryLog("tempcard.card_order_no : " + tempcard.card_order_no);
+
+                                        tempAttachment = dbutil.getAttachmentFromDialog(tempcard, activity);
                                         if (tempAttachment != null)
                                         {
                                             commonReply.Attachments.Add(tempAttachment);
