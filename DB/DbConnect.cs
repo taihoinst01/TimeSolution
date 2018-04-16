@@ -1051,7 +1051,7 @@ namespace TimeSolution.DB
         {
             get
             {
-                String query = Regex.Replace(MessagesController.queryStr, @"[^a-zA-Z0-9ㄱ-힣]", "", RegexOptions.Singleline).Replace(" ", "");
+                String query = Regex.Replace(MessagesController.queryStr, @"[^a-zA-Z0-9ㄱ-힣-]", "", RegexOptions.Singleline).Replace(" ", "");
                 SqlDataReader rdr = null;
                 //List<RecommendConfirm> rc = new List<RecommendConfirm>();
                 String entityarr = "";
