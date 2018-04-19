@@ -408,6 +408,13 @@ namespace TimeSolution
                                         {
                                             commonReply.Attachments.Add(tempAttachment);
                                         }
+
+                                        //2018-04-19:KSO:Carousel 만드는부분 추가
+                                        if (tempcard.card_order_no > 1)
+                                        {
+                                            commonReply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                                        }
+
                                     }
                                 }
                                 else
