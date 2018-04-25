@@ -29,5 +29,6 @@ namespace TimeSolution.Models
         public String cardValue;
         //public String card_order_no;
         public int card_order_no;
+        public int gesture; //제스처 추가
     }
 }

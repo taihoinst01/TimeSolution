@@ -184,29 +184,33 @@ namespace TimeSolution.DB
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
-
-                cmd.CommandText += " SELECT   				    ";
-                cmd.CommandText += " 	DLG_ID,                 ";
-                cmd.CommandText += " 	DLG_NAME,               ";
-                cmd.CommandText += " 	DLG_DESCRIPTION,        ";
-                cmd.CommandText += " 	DLG_LANG,               ";
-                cmd.CommandText += " 	DLG_TYPE,               ";
-                cmd.CommandText += " 	DLG_ORDER_NO,           ";
-                cmd.CommandText += " 	DLG_GROUP               ";
-                cmd.CommandText += " FROM TBL_DLG               ";
-                cmd.CommandText += " WHERE DLG_ID = @dlgId      ";
-                cmd.CommandText += " AND USE_YN = 'Y'           ";
-                cmd.CommandText += " ORDER BY  DLG_ORDER_NO     ";
+                //2018-04-25 : QUERY 변경 => 제스처 추가
+                cmd.CommandText += " SELECT   				                    ";
+                cmd.CommandText += " 	A.DLG_ID,                               ";
+                cmd.CommandText += " 	A.DLG_NAME,                             ";
+                cmd.CommandText += " 	A.DLG_DESCRIPTION,                      ";
+                cmd.CommandText += " 	A.DLG_LANG,                             ";
+                cmd.CommandText += " 	A.DLG_TYPE,                             ";
+                cmd.CommandText += " 	A.DLG_ORDER_NO,                         ";
+                cmd.CommandText += " 	A.DLG_GROUP,                            ";
+                cmd.CommandText += " 	B.GESTURE                               ";
+                cmd.CommandText += " FROM TBL_DLG A, TBL_DLG_RELATION_LUIS B    ";
+                cmd.CommandText += " WHERE A.DLG_ID = B.DLG_ID                  ";
+                cmd.CommandText += "   AND A.DLG_ID = @dlgId                    ";
+                cmd.CommandText += "   AND A.USE_YN = 'Y'                       ";
+                cmd.CommandText += " ORDER BY  A.DLG_ORDER_NO                   ";
 
                 cmd.Parameters.AddWithValue("@dlgID", dlgID);
                 rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (rdr.Read())
                 {
-                    dlg.dlgId = Convert.ToInt32(rdr["DLG_ID"]);
-                    dlg.dlgType = rdr["DLG_TYPE"] as string;
-                    dlg.dlgGroup = rdr["DLG_GROUP"] as string;
-                    dlg.dlgOrderNo = rdr["DLG_ORDER_NO"] as string;
+                    dlg.dlgId           = Convert.ToInt32(rdr["DLG_ID"]);
+                    dlg.dlgType         = rdr["DLG_TYPE"] as string;
+                    dlg.dlgGroup        = rdr["DLG_GROUP"] as string;
+                    dlg.dlgOrderNo      = rdr["DLG_ORDER_NO"] as string;
+                    //2018-04-25 : 제스처 추가
+                    dlg.gesture         = Convert.ToInt32(rdr["gesture"]);
 
                     using (SqlConnection conn2 = new SqlConnection(connStr))
                     {
@@ -259,6 +263,8 @@ namespace TimeSolution.DB
                                 dlgCard.cardValue = rdr2["CARD_VALUE"] as string;
                                 //dlgCard.card_order_no = rdr2["CARD_ORDER_NO"] as string;
                                 dlgCard.card_order_no = Convert.ToInt32(rdr2["CARD_ORDER_NO"]);
+                                //2018-04-25 : 제스처 추가
+                                dlgCard.gesture = dlg.gesture;
 
                                 dialogCards.Add(dlgCard);
                             }
@@ -528,11 +534,11 @@ namespace TimeSolution.DB
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText += "SELECT LUIS_ID, LUIS_INTENT, LUIS_ENTITIES, ISNULL(DLG_ID,0) AS DLG_ID, DLG_API_DEFINE, API_ID ";
-                cmd.CommandText += "  FROM TBL_DLG_RELATION_LUIS                                                    ";
-                cmd.CommandText += " WHERE 1=1                                               ";
+                cmd.CommandText += "SELECT A.LUIS_ID, A.LUIS_INTENT, A.LUIS_ENTITIES, ISNULL(A.DLG_ID,0) AS DLG_ID, A.DLG_API_DEFINE, A.API_ID ";
+                cmd.CommandText += "  FROM TBL_DLG_RELATION_LUIS A, TBL_DLG B                                                    ";
+                cmd.CommandText += " WHERE A.DLG_ID = B.DLG_ID                                               ";
                 //cmd.CommandText += " WHERE LUIS_INTENT = @intentId                                                 ";
-                cmd.CommandText += "   AND LUIS_ENTITIES = @entities                                                ";
+                cmd.CommandText += "   AND A.LUIS_ENTITIES = @entities                                                ";
                 //cmd.CommandText += "   AND LUIS_ID = @luisId                                                        ";
 
                 if(intentId != null){
@@ -553,9 +559,9 @@ namespace TimeSolution.DB
                 else{
                     cmd.Parameters.AddWithValue("@luisId", DBNull.Value);
                 }
+                cmd.CommandText += "   ORDER BY B.DLG_ORDER_NO ASC                                               ";
 
 
-                
 
                 Debug.WriteLine("query : " + cmd.CommandText);
 
