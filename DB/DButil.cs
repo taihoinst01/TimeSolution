@@ -556,12 +556,8 @@ namespace TimeSolution.DB
                     {
                         Title = card.cardTitle,
                         Images = cardImages,
-                        Buttons = cardButtons
-
-                        //Title = card.cardTitle,
-                        //Images = cardImages,
-                        //Buttons = cardButtons,
-                        //Gesture = card.gesture //2018-04-24 : 제스처 추가
+                        Buttons = cardButtons,
+                        Gesture = card.gesture //2018-04-24 : 제스처 추가
                     };
                     returnAttachment = plCard.ToAttachment();
                 }
@@ -578,16 +574,8 @@ namespace TimeSolution.DB
                             Images = cardImages,
                             Buttons = cardButtons,
                             Card_division = cardDiv,
-                            Card_value = cardVal
-
-
-                            //Title = "선택해 주세요",
-                            //Text = card.cardText,
-                            //Images = cardImages,
-                            //Buttons = cardButtons,
-                            //Card_division = cardDiv,
-                            //Card_value = cardVal,
-                            //Gesture = card.gesture //2018-04-24 : 제스처 추가
+                            Card_value = cardVal,
+                            Gesture = card.gesture //2018-04-24 : 제스처 추가
                         };
                         returnAttachment = plCard.ToAttachment();
                     }
@@ -601,16 +589,8 @@ namespace TimeSolution.DB
                             Images = cardImages,
                             Buttons = cardButtons,
                             Card_division = cardDiv,
-                            Card_value = cardVal
-
-                            //Title = card.cardTitle,
-                            //Text = card.cardText,
-                            //Images = cardImages,
-                            //Buttons = cardButtons,
-                            //Card_division = cardDiv,
-                            //Card_value = cardVal,
-                            //Gesture = card.gesture //2018-04-24 : 제스처 추가
-
+                            Card_value = cardVal,
+                            Gesture = card.gesture //2018-04-24 : 제스처 추가
                         };
                         returnAttachment = plCard.ToAttachment();
                     }

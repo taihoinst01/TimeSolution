@@ -30,8 +30,8 @@ namespace TimeSolution.Models
         [Newtonsoft.Json.JsonProperty(PropertyName = "card_cnt")]
         public int Card_cnt { get; set; }
 
-        //[Newtonsoft.Json.JsonProperty(PropertyName = "gesture")]
-        //public int Gesture { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "gesture")]
+        public int Gesture { get; set; }
 
     }
 }
