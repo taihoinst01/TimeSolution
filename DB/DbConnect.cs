@@ -210,7 +210,7 @@ namespace TimeSolution.DB
                     dlg.dlgGroup        = rdr["DLG_GROUP"] as string;
                     dlg.dlgOrderNo      = rdr["DLG_ORDER_NO"] as string;
                     //2018-04-25 : 제스처 추가
-                    dlg.gesture         = Convert.ToInt32(rdr["gesture"]);
+                    //dlg.gesture         = Convert.ToInt32(rdr["gesture"]);
 
                     using (SqlConnection conn2 = new SqlConnection(connStr))
                     {
@@ -264,7 +264,7 @@ namespace TimeSolution.DB
                                 //dlgCard.card_order_no = rdr2["CARD_ORDER_NO"] as string;
                                 dlgCard.card_order_no = Convert.ToInt32(rdr2["CARD_ORDER_NO"]);
                                 //2018-04-25 : 제스처 추가
-                                dlgCard.gesture = dlg.gesture;
+                                //dlgCard.gesture = dlg.gesture;
 
                                 dialogCards.Add(dlgCard);
                             }
