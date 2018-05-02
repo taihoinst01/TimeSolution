@@ -140,6 +140,9 @@ namespace TimeSolution
                 List<ConfList> confList = db.SelectConfig();
                 DButil.HistoryLog("db SelectConfig end!! ");
 
+
+                DButil.HistoryLog("* confList.Count : " + confList.Count);
+
                 for (int i = 0; i < confList.Count; i++)
                 {
                     switch (confList[i].cnfType)
@@ -147,6 +150,10 @@ namespace TimeSolution
                         case "LUIS_APP_ID":
                             LUIS_APP_ID[LUIS_APP_ID.Count(s => s != null)] = confList[i].cnfValue;
                             LUIS_NM[LUIS_NM.Count(s => s != null)] = confList[i].cnfNm;
+
+                            DButil.HistoryLog("* confList["+i+"].cnfNm : " + confList[i].cnfNm);
+                            DButil.HistoryLog("* confList[" + i + "].cnfValue : " + confList[i].cnfValue);
+
                             break;
                         case "LUIS_SUBSCRIPTION":
                             LUIS_SUBSCRIPTION = confList[i].cnfValue;
