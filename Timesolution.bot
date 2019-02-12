@@ -1,0 +1,19 @@
+{
+    "name": "Timesolution",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "e9f57396-64ec-45a0-814a-80bbfba12888",
+            "appPassword": "jLSIzoYXSdGwt@bw",
+            "endpoint": "http://localhost:3979/api/messages",
+            "id": "5b256400-2b3c-11e9-97e4-d92f6032e3d6",
+            "name": "Timesolution",
+            "channelService": "https://botframework.azure.us"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "path": "C:\\Users\\sokan\\source\\repos\\TimeSolution\\Timesolution.bot",
+    "overrides": null
+}
